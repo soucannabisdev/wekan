@@ -1,4 +1,19 @@
 Utils = {
+  setSwimlanesHeight(swimlanesHeight) {
+    const currentBoard = Boards.findOne(Session.get('currentBoard'));
+    if (currentBoard.swimlanesHeightEnabled === true || currentBoard.swimlanesHeightEnabled === 'true') {
+      if (swimlanesHeight !== undefined) {
+        $(".swimlane").css({"max-height":"calc(" + swimlanesHeight + "px)"});
+      } else if (currentBoard.swimlanesHeight !== undefined) {
+        $(".swimlane").css({"max-height":"calc(" + currentBoard.swimlanesHeight + "px)"});
+      }
+    }
+  },
+  unsetSwimlanesHeight() {
+    const currentBoard = Boards.findOne(Session.get('currentBoard'));
+    Meteor.call('unsetSwimlanesHeight');
+    $(".swimlane").css({"max-height":"calc(100% - 26px)"});
+  },
   setBackgroundImage(url) {
     const currentBoard = Boards.findOne(Session.get('currentBoard'));
     if (currentBoard.backgroundImageURL !== undefined) {

@@ -92,6 +92,8 @@ Meteor.publish('boardsReport', function() {
         permission: 1,
         type: 1,
         sort: 1,
+        swimlanesHeightEnabled: 1,
+        swimlanesHeight: 1,
       },
       sort: { sort: 1 /* boards default sorting */ },
     },

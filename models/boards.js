@@ -625,6 +625,24 @@ Boards.attachSchema(
       decimal: true,
       defaultValue: -1,
     },
+
+    swimlanesHeightEnabled: {
+      /**
+       * Is setting enabled for height of swimlanes in this board?
+       */
+      type: Boolean,
+      defaultValue: false,
+      optional: true,
+    },
+
+    swimlanesHeight: {
+      /**
+       * Height of all swimlanes in this board.
+       */
+      type: Number,
+      decimal: false,
+      optional: true,
+    },
   }),
 );
 
@@ -1307,6 +1325,41 @@ Boards.mutations({
     }
   },
 
+  setSwimlanesHeightEnabled(swimlanesHeightEnabled) {
+    check(swimlanesHeightEnabled, Boolean);
+    if(Meteor.user().isBoardAdmin()) {
+      return { $set: { swimlanesHeightEnabled } };
+    } else if (Meteor.user().isAdmin()) {
+      return { $set: { swimlanesHeightEnabled } };
+    } else {
+      return false;
+    }
+  },
+
+  setSwimlanesHeight(swimlanesHeight) {
+    check(swimlanesHeight, Number);
+    if (swimlanesHeight > 50) {
+      if(Meteor.user().isBoardAdmin()) {
+        return { $set: { swimlanesHeight } };
+      } else if (Meteor.user().isAdmin()) {
+        return { $set: { swimlanesHeight } };
+      } else {
+        return false;
+      }
+    }
+  },
+
+  unsetSwimlanesHeightEnabled() {
+    const swimlanesHeight = null;
+    if(Meteor.user().isBoardAdmin()) {
+      return { $set: { swimlanesHeightEnabled } };
+    } else if (Meteor.user().isAdmin()) {
+      return { $set: { swimlanesHeightEnabled } };
+    } else {
+      return false;
+    }
+  },
+
   setVisibility(visibility) {
     return { $set: { permission: visibility } };
   },
@@ -1693,6 +1746,14 @@ if (Meteor.isServer) {
     getBackgroundImageURL(boardId) {
       check(boardId, String);
       return Boards.findOne({ boardId: boardId }, {}, { backgroundImageUrl: 1 });
+    },
+    getSwimlanesHeight(boardId) {
+      check(boardId, String);
+      return Boards.findOne({ boardId: boardId }, {}, { swimlanesHeight: 1 });
+    },
+    getSwimlanesHeightEnabled(boardId) {
+      check(boardId, String);
+      return Boards.findOne({ boardId: boardId }, {}, { swimlanesHeightEnabled: 1 });
     },
     quitBoard(boardId) {
       check(boardId, String);

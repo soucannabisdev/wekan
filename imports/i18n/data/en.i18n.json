@@ -1220,5 +1220,9 @@
   "max-avatar-filesize": "Max avatar filesize in bytes:",
   "allowed-avatar-filetypes": "Allowed avatar filetypes:",
   "invalid-file": "If filename is invalid, upload or rename is cancelled.",
-  "preview-pdf-not-supported": "Your device does not support previewing PDF. Try downloading instead."
+  "preview-pdf-not-supported": "Your device does not support previewing PDF. Try downloading instead.",
+  "set-swimlanes-height": "Set Swimlanes Height",
+  "set-swimlanes-height-info": "If enabled, you can set height in pixels (for example 200) for all swimlanes at this board.",
+  "setSwimlanesHeightPopup-title": "Set Swimlanes Height",
+  "enable-swimlanes-height": "Enable Swimlanes Height"
 }

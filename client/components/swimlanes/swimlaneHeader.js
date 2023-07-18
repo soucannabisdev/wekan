@@ -36,6 +36,7 @@ Template.swimlaneFixedHeader.helpers({
 
 Template.swimlaneActionPopup.events({
   'click .js-set-swimlane-color': Popup.open('setSwimlaneColor'),
+  'click .js-set-swimlanes-height': Popup.open('setSwimlanesHeight'),
   'click .js-close-swimlane'(event) {
     event.preventDefault();
     this.archive();
@@ -43,6 +44,17 @@ Template.swimlaneActionPopup.events({
   },
   'click .js-move-swimlane': Popup.open('moveSwimlane'),
   'click .js-copy-swimlane': Popup.open('copySwimlane'),
+});
+
+Template.swimlaneActionPopup.helpers({
+  isBoardAdmin() {
+    return Meteor.user().isBoardAdmin();
+  },
+
+  isSwimlanesHeightEnabled() {
+    return Meteor.call('getSwimlanesHeightEnabled', Session.get('currentBoard'));
+  },
+
 });
 
 Template.swimlaneActionPopup.events({

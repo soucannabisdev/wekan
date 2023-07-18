@@ -336,6 +336,7 @@ BlazeComponent.extendComponent({
   onRendered() {
     this.setLoading(false);
     Utils.setBackgroundImage();
+    Utils.setSwimlanesHeight();
   },
 
   setError(error) {
